@@ -1,0 +1,32 @@
+nutch:
+    image: nutch:alpha2
+    ports:
+        - "8080:8080"
+        - "8081:8081"
+    # links:
+    # - "elasticsearch:elasticsearch"
+    volumes:
+        - "./config/ivy.xml:/root/nutch/ivy/ivy.xml"
+        - "./config/nutch-site.xml:/root/nutch/conf/nutch-site.xml"
+        - "./config/regex-urlfilter.txt:/root/nutch/conf/regex-urlfilter.txt"
+        - "./crawldata:/root/crawldata"
+        - "./config/seed.txt:/root/urls/seed.txt"
+        - "./config/startup.sh:/root/startup.sh"
+        # - "./cert/1.crt:/root/1.crt"
+# Uncomment the next lines to start a local Elasticsearch server
+# elasticsearch:
+#     image: elasticsearch:5.4.3
+#     ports:
+#         - "9200:9200"
+#         - "9300:9300"
+#     volumes:
+#         - ./elasticlogs:/usr/share/elasticsearch/logs/
+
+# Uncomment the next lines to start a local cerebro server
+# cerebro:
+#     image: yannart/cerebro
+#     command: bin/cerebro -Dhosts.0.host=http://elasticsearch:9200
+#     ports:
+#         - "9000:9000"
+#     links:
+#         - "elasticsearch:elasticsearch"
